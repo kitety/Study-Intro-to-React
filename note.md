@@ -38,3 +38,43 @@ fill() 方法用一个固定值填充一个数组中从起始索引到终止索�
 ```
 事件的名称采用的是on[Event]的形式,不管是在标签还是自定义的标签上面都可以使用
 ```
+8.可读性
+---
+```
+为了便于阅读，将返回的元素拆分为多行，并添加了括号，以便JavaScript在返回后不插入分号并破坏我们的代码。
+```
+9.保持数据的不变性,可以拷贝一次来使用
+---
+```
+//直接操作数据
+var player1={score:1,name:'jkeff'}
+player1.score=2;
+//player1={score:2,name:'jkeff'}
+//没有直接操作数据
+var player2={score:1,name:'jkeff'}
+var newPlayer=Object.assign({},player2,{score:2})
+//player2没有发生变化,不修改底层的东西
+//newPlayer={score:2,name:'jkeff'}
+//相关资料:https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
+不变性的主要好处是它可以在React中构建纯组件。不可变数据可以很容易地确定是否已经进行了更改，这有助于确定组件何时需要重新render。
+```
+10.功能组件
+---
+```
+只包含一个render方法,不包含自身的state属性,可以写成一个function形式
+传参为输入,返回为render方法
+function Square(props) {
+  return (
+    <button className="square" onClick={props.onClick}>
+      {props.value}
+    </button>
+  );
+}
+//注意:onClick={()=>{this.props.onClick()}} 变换为 onClick={props.onClick} //没有括号
+//在这里可有不用加this
+```
+11.concat方法
+---
+```
+concat() 方法用于合并两个或多个数组。此方法不会更改现有数组，而是返回一个新数组。
+```
