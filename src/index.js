@@ -66,13 +66,16 @@ class Game extends React.Component {
             history: [
                 { squares: Array(9).fill(null) }
             ],
+            stepNumber: 0,
             xIsNext: true
         }
     }
     handleClick(i) {
-        const history = this.state.history
+        // 复制数组
+        const history = this.state.history.slice(0, this.state.stepNumber + 1)
+        
         const current = history[history.length - 1]
-        // make a copy Array
+        // 复制数组,都是在前面的基础上复制
         const squares = current.squares.slice();
         // 已经胜利或者已经选择就return
         if (calculateWinner(squares) || squares[i]) {
@@ -88,13 +91,30 @@ class Game extends React.Component {
                     squares: squares
                 }
             ]),
+            stepNumber: history.length,
             xIsNext: !this.state.xIsNext
+        })
+    }
+    jumpTo(step) {
+        this.setState({
+            stepNumber: step,
+            xIsNext: (step % 2) === 0
         })
     }
     render() {
         const history = this.state.history
-        const current = history[history.length - 1]
+        const current = history[this.state.stepNumber]
         const winner = calculateWinner(current.squares)
+        const moves = history.map((step, move) => {
+            // step遍历的数组 move为索引
+            const desc = move ? 'Go to move #' + move : 'Go to game start'
+            return (
+                <li key={move}>
+                    <button onClick={() => this.jumpTo(move)}>{desc}</button>
+                </li>
+            )
+        })
+
         let status;
         if (winner) {
             status = `Winner ${winner}`
@@ -111,8 +131,8 @@ class Game extends React.Component {
                     />
                 </div>
                 <div className="game-info">
-                    <div>{/* status */}</div>
-                    <ol>{/* TODO */}</ol>
+                    <div>{status}</div>
+                    <ol>{moves}</ol>
                 </div>
             </div>
         );

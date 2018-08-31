@@ -78,3 +78,22 @@ function Square(props) {
 ```
 concat() 方法用于合并两个或多个数组。此方法不会更改现有数组，而是返回一个新数组。
 ```
+12.react元素数组
+---
+```
+map方法将会返回一个新的数组
+地址:https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+```
+13.key的重要性
+---
+```
+key:作为react的添加,删除,重新渲染的一种判断依据.类似于每个组件的id(唯一性),因此在遍历的时候也强力建议附有唯一性的属性.key不需要全局唯一,只需要在组件和它们的兄弟组件之间是唯一的。
+```
+14.slice
+---
+```
+地址:https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
+var animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];
+console.log(animals.slice(0,animals.length+1));//复制数组,返回新的,原来的不会改变
+console.log(animals.slice());//复制数组,返回新的,原来的不会改变
+```
