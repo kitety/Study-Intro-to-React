@@ -71,9 +71,9 @@ class Game extends React.Component {
         }
     }
     handleClick(i) {
-        // 复制数组
+        // 复制数组,而且固定了复制的长度
         const history = this.state.history.slice(0, this.state.stepNumber + 1)
-        
+        //当前的
         const current = history[history.length - 1]
         // 复制数组,都是在前面的基础上复制
         const squares = current.squares.slice();
@@ -85,7 +85,7 @@ class Game extends React.Component {
         // 这个已经是在操作this.state了,每次次改都要重置
         //这里要用xIsNext: !this.state.xIsNext,因为前面可以读到this.state,后面的呢不可以
         this.setState({
-            // concat 返回新的数组
+            // concat 返回新的数组,抛弃了固定了复制的长度的之前的
             history: history.concat([
                 {
                     squares: squares
